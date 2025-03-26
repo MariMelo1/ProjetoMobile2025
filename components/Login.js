@@ -2,7 +2,7 @@
 import { View, TextInput, Button,Text, StyleSheet,} from "react-native"
 
 
-export default function Login(){
+export default function Login({navigation}){
     return(
         <View style={styles.container} >
             <Text>LOGIN</Text>
@@ -17,6 +17,7 @@ export default function Login(){
             <Button
             color={'#FF007F'}
             title="Login"
+            onPress={() => navigation.navigate('Home')}
             />
         </View>
 
