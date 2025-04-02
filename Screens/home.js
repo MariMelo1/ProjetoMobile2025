@@ -1,7 +1,7 @@
 import { View, Text, Image,StyleSheet} from "react-native"
 
 
-export default function Test(){
+export default function Home(){
     return(
         <View style={styles.container}>
 
@@ -25,7 +25,7 @@ export default function Test(){
 const styles = StyleSheet.create({
     container:{
         flex: 1,     
-        backgroundColor: '#ea3c79',
+      
       
         
     }, 

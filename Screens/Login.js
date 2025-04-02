@@ -17,7 +17,7 @@ export default function Login({navigation}){
             <Button
             color={'#FF007F'}
             title="Login"
-            onPress={() => navigation.navigate('Home')}
+            onPress={() => navigation.navigate('HomeTab')}
             />
         </View>
 
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
         flex: 1, 
         alignItems: 'center',
         justifyContent: 'space-around',
-        backgroundColor: '#FFCBDB',
+     
     
     },
     input:{
