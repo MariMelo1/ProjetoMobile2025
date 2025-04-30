@@ -1,28 +1,30 @@
 
 import { View, TextInput, Button,Text, StyleSheet,} from "react-native"
 import {useState} from 'react'
-import { signInWithEmailAndPassword } from "firebase/auth";
-
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../controller";
 
-export default function Login({navigation}){
+export default function Register({navigation}){
 
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
+    
 
-    const VerificaUser = () => {
-        signInWithEmailAndPassword(auth, email, senha).then(userCredential => {
-            console.log('usuario logado', userCredential.user.email);
-        })
-        .catch((error) => {
-            console.log('erro ao logar', error.message);
+    const cadastroUser = () => {
+        createUserWithEmailAndPassword(auth, email, senha).then((userCredential) => {
+            console.log('cadastrado!', userCredential.user.email);
+            navigation.navigate('Login');
+          })
+          .catch((error) => {
+            console.log('erro', error.message);
+           
           });
-        
     }
 
     return(
         <View style={styles.container} >
-            <Text>LOGIN</Text>
+            <Text>CADASTRO</Text>
+
             <TextInput
             style={styles.input}
             placeholder="Email"
@@ -38,14 +40,14 @@ export default function Login({navigation}){
             />
             <Button
             color={'#FF007F'}
-            title="Entrar"
-            onPress={VerificaUser}
-           
+            title="Cadastrar"
+            onPress={cadastroUser}
+        
             />
             <Button
             color={'#FF007F'}
-            title="Cadastre-se"
-            onPress={() => navigation.navigate('Cadastro')}
+            title="Login"
+            onPress={() => navigation.navigate('Login')}
             />
         </View>
 
