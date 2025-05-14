@@ -1,14 +1,28 @@
 import {View, Text, StyleSheet, FlatList, Image} from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Card from '../components/card';
+import {db} from '../controller';
+import { collection, getDocs } from 'firebase/firestore';
 
 export default function Product(){
-    const [produtos, setProdutos] = useState([
-        {id:1, nome: 'Camiseta', valor: 99.99, imagem: 'https://anarhu.cdn.magazord.com.br/img/2023/08/produto/4282/camiseta-branca-anarhu.jpg?ims=fit-in/635x865/filters:fill(white)'},
-        {id:2, nome:'Moletom', valor: 159.90, imagem: 'https://www.kacewear.com.br/cdn/shop/products/Moletom_Canguru_com_Capuz_Ferrugem_Logo_Bordada_Kace_Frente.png?v=1670023792'},
-        {id:3, nome:'Tênis', valor: 89.90, imagem: 'https://shoemix.fbitsstatic.net/img/p/tenis-casual-vizzano-branco-feminino-1307-206-16507-76969/301810-1.jpg?w=670&h=670&v=no-change&qs=ignore'},
-        {id:4, nome:'Calça', valor: 250.00, imagem: 'https://blacktarg.cdn.magazord.com.br/img/2021/11/produto/157/calca-jogger-tactel-dread-texas-masculina-1.jpg?ims=fit-in/425x635/filters:fill(white)'}
-    ])
+    const [produtos, setProdutos] = useState([]);
+
+    useEffect(() => {
+        async function carregarProdutos() {
+            try {
+                const querySnapshot = await getDocs(collection(db,'produtos'));
+                const lista = [];
+                querySnapshot.forEach((doc)=>{
+                    lista.push({id:doc.id, ...doc.data()});
+                });
+                setProdutos(lista);
+            } catch (error){
+                console.log('erro ao buscar produtps:', error);
+            }  
+        }
+        carregarProdutos();
+    }, []);
+
 
     return(
         <View style={styles.container}>

@@ -11,6 +11,7 @@ import Feed from './Screens/feed';
 import Counter from './Screens/counter';
 import Product from './Screens/Product';
 import Register from './Screens/Register';
+import AddProduct from './Screens/AddProducts';
 
 function BottomTabs(){
   const BottomTab = createBottomTabNavigator();
@@ -28,6 +29,12 @@ function BottomTabs(){
     options={{
       tabBarIcon: () => (
         <MaterialIcons name="shopping-cart" size={30} color="#FF007F" />
+      ),
+    }}/>
+    <BottomTab.Screen name='AddProduto' component={AddProduct}
+    options={{
+      tabBarIcon: () => (
+        <MaterialIcons name="upload" size={30} color="#FF007F" />
       ),
     }}/>
 

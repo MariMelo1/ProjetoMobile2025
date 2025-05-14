@@ -1,5 +1,5 @@
 
-import { View, TextInput, Button,Text, StyleSheet,} from "react-native"
+import { View, TextInput, Button,Text, StyleSheet, TouchableOpacity,} from "react-native"
 import {useState} from 'react'
 import { signInWithEmailAndPassword } from "firebase/auth";
 
@@ -13,6 +13,7 @@ export default function Login({navigation}){
     const VerificaUser = () => {
         signInWithEmailAndPassword(auth, email, senha).then(userCredential => {
             console.log('usuario logado', userCredential.user.email);
+            navigation.navigate('HomeTab');
         })
         .catch((error) => {
             console.log('erro ao logar', error.message);
@@ -42,26 +43,29 @@ export default function Login({navigation}){
             onPress={VerificaUser}
            
             />
-            <Button
+            {/* <Button
             color={'#FF007F'}
             title="Cadastre-se"
             onPress={() => navigation.navigate('Cadastro')}
-            />
+            /> */}
+            <TouchableOpacity onPress={() => navigation.navigate('Cadastro')}>
+                <Text style={styles.txtcadast}>Cadastre-se</Text>
+            </TouchableOpacity>
         </View>
-
     )
 }
-
 const styles = StyleSheet.create({
     container:{
         flex: 1, 
         alignItems: 'center',
-        justifyContent: 'space-around',
-     
-    
+        justifyContent: 'space-around',  
     },
     input:{
         borderWidth: 1,
         borderColor: '#FF007F'
+    },
+    txtcadast:{
+        fontSize: 20,
+        color: '#FF007F',
     }
 })

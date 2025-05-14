@@ -44,11 +44,11 @@ export default function Register({navigation}){
             onPress={cadastroUser}
         
             />
-            <Button
+            {/* <Button
             color={'#FF007F'}
             title="Login"
             onPress={() => navigation.navigate('Login')}
-            />
+            /> */}
         </View>
 
     )
