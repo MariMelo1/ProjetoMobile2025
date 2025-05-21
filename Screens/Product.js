@@ -3,9 +3,11 @@ import { useState, useEffect } from 'react';
 import Card from '../components/card';
 import {db} from '../controller';
 import { collection, getDocs } from 'firebase/firestore';
+import { useCarrinho } from '../components/ProviderCart';
 
-export default function Product(){
+export default function Product({navigation}){
     const [produtos, setProdutos] = useState([]);
+    const {adicionarProduto} = useCarrinho();
 
     useEffect(() => {
         async function carregarProdutos() {
@@ -23,16 +25,8 @@ export default function Product(){
         carregarProdutos();
     }, []);
 
-
     return(
         <View style={styles.container}>
-            {/* array com map
-            <Text style={styles.text}>Lista de Produtos</Text>
-            {produtos.map((item) => (
-                <Text style={styles.txtprod}>
-                {item.nome} - R$ {item.valor}
-                </Text>
-            ))} */}
             <Text style={styles.text}>Lista de Produtos</Text>
             <FlatList
             data = {produtos}
@@ -41,6 +35,10 @@ export default function Product(){
                 nome={item.nome}
                 valor={item.valor}
                 imagem={item.imagem}
+                comprar={() => {
+                    adicionarProduto(item);
+                    navigation.navigate('carrinho');
+                }}
                 />
             )}
             keyExtractor={item => item.id}
