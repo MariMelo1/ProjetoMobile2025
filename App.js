@@ -30,7 +30,7 @@ function BottomTabs(){
     <BottomTab.Screen name='Product' component={Product}
     options={{
       tabBarIcon: () => (
-        <MaterialIcons name="shopping-cart" size={30} color="#FF007F" />
+        <MaterialIcons name="apps" size={30} color="#FF007F" />
       ),
     }}/>
     <BottomTab.Screen name='AddProduto' component={AddProduct}
@@ -42,7 +42,7 @@ function BottomTabs(){
        <BottomTab.Screen name='carrinho' component={Carrinho}
     options={{
       tabBarIcon: () => (
-        <MaterialIcons name="upload" size={30} color="#FF007F" />
+        <MaterialIcons name="shopping-cart" size={30} color="#FF007F" />
       ),
     }}/>
 

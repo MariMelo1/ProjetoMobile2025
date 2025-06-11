@@ -1,19 +1,23 @@
 import {View, Text, Image, StyleSheet, FlatList} from 'react-native';
 import { useCarrinho } from '../components/ProviderCart';
 
+import Card from '../components/card';
+
 export default function Carrinho(){
-    const {carrinho} = useCarrinho();
+    const {carrinho, removerProduto} = useCarrinho();
     return (
         <View style={styles.container}>
             <Text style={styles.text}> Carrinho </Text>
             <FlatList
             data={carrinho}
-            renderItem={({item}) => (
-                <View style={styles.card}>
-                    <Image style={styles.img} source={{uri: item.imagem}} />
-                    <Text style={styles.txtprod}>{item.nome}</Text>
-                    <Text style={styles.txtprod}>R$ {item.valor}</Text>
-                </View>
+            renderItem={({item, index}) => (
+                <Card
+                nome={item.nome}
+                valor={item.valor}
+                imagem={item.imagem}
+                remover={() => removerProduto(index)}
+
+                />
             )}
             /> 
         </View>
